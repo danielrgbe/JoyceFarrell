@@ -9,7 +9,7 @@ package capitulo10.ejercicio2;
  *
  * @author daniel
  */
-public class PruebaVelas
+public class DemoCandle
 {
 
     /**
