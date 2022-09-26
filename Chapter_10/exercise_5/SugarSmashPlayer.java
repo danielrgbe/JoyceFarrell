@@ -5,7 +5,7 @@ public class SugarSmashPlayer
 	private int idNumber;	
 	private String name;
 	private int[] highestScores = new int[NUMBER_OF_LEVELS];
-	private int levelsUnlock;
+	public static int levelsUnlock;
 	
 	public SugarSmashPlayer()
 	{
@@ -34,7 +34,7 @@ public class SugarSmashPlayer
 	
 	public int getHightScore(int level)
 	{
-		return highestScores[level];
+		return highestScores[level - 1];
 	}
 
 	public void setHightScore(int hightScore, int level)
@@ -44,7 +44,7 @@ public class SugarSmashPlayer
 			if(level <= levelsUnlock)//Si estan desbloqueados y ya tienen alguna puntuación
 			{
 				//Solo si es el primer nivel no verifiques que la puntuación supere la puntuación mínima
-				if(superaPuntuacionMinima(hightScore, level))
+				if(superaPuntuacionMinima(hightScore, level) && levelsUnlock <= NUMBER_OF_LEVELS)
 				{
 					//verifica que la nueva puntuación sea mayor a la antigua puntuación
 					if(hightScore > highestScores[level - 1])
@@ -57,7 +57,10 @@ public class SugarSmashPlayer
 			{
 				if(level - 1 == levelsUnlock)//se puede desbloquear pero aun no tiene una puntuación
 					if(superaPuntuacionMinima(hightScore, level))
+					{
 						highestScores[level - 1] = hightScore;
+						levelsUnlock += 1;
+					}
 				else
 					System.out.println("El nivel aun no ha sido desbloqueado");	
 			}
@@ -81,6 +84,10 @@ public class SugarSmashPlayer
 	@Override
 	public String toString()
 	{
-		return "todo ok";
+		String scores = "";
+		for(int i = 1; i <= levelsUnlock; i ++)
+			scores += "scores:" + getHightScore(i)+ "\n";
+
+		return scores;
 	}
 }
