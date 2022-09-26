@@ -1,16 +1,25 @@
 public class SugarSmashPlayer
 {
-	private static final int NUMBER_OF_LEVELS = 10;
+	private final int NUMBER_OF_LEVELS;
 	private static final int MIN_SCORE = 100;
 	private int idNumber;	
 	private String name;
-	private int[] highestScores = new int[NUMBER_OF_LEVELS];
-	public static int levelsUnlock;
+	private int[] highestScores;
+	private int levelsUnlock;
 	
+
 	public SugarSmashPlayer()
 	{
+		this(10);
+	}
+	
+	public SugarSmashPlayer(int numberOfLevels)
+	{
+		NUMBER_OF_LEVELS = numberOfLevels;
+		highestScores = new int[NUMBER_OF_LEVELS];
 		levelsUnlock = 1;
 	}
+
 
 	public int getIdNumber()
 	{
@@ -86,7 +95,7 @@ public class SugarSmashPlayer
 	{
 		String scores = "";
 		for(int i = 1; i <= levelsUnlock; i ++)
-			scores += "scores:" + getHightScore(i)+ "\n";
+			scores += "level: " + i +  " score: " + getHightScore(i)+ "\n";
 
 		return scores;
 	}
